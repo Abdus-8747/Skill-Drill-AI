@@ -33,6 +33,8 @@ const SignUp = ({ setCurrentPage }) => {
           return
         }
         setError("")
+
+        //SignUp Api Call
   }
   return (
     <div className='w-[-95vw] md:w-[33vw] p-7 flex flex-col justify-center'>
