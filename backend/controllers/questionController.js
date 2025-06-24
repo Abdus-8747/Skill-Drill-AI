@@ -35,8 +35,10 @@ exports.togglePinQuestion = async (req, res) => {
         const question = await Question.findById(req.params.id)
 
         if(!question) return res.status(400).json({ message: "Question not found" })
-
+        console.log(question.isPinned);
         question.isPinned = !question.isPinned
+        console.log(question.isPinned);
+        
         await question.save()
 
         return res.status(200).json({ success: true, question })

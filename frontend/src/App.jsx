@@ -6,10 +6,12 @@ import SignUp from './pages/Auth/SignUp'
 import Dashboard from './pages/Home/Dashboard'
 import InterviewPrep from './pages/Interview Prep/InterviewPrep'
 import { Toaster } from 'react-hot-toast'
+import UserProvider from './context/userContext'
 
 
 const App = () => {
   return (
+    <UserProvider>
     <div className=''>
       <Router>
         <Routes>
@@ -31,6 +33,7 @@ const App = () => {
         }
       }} />
     </div>
+    </UserProvider>
   )
 }
 

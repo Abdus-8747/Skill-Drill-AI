@@ -1,24 +1,28 @@
-const multer = require("multer")
+const multer = require("multer");
+const path = require("path");
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/")
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`)
-    }
-})
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); 
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
 
-const fileFilter = (req, file, cb) => {
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = /jpeg|jpg|png/;
+    const isMimeType = allowedTypes.test(file.mimetype);
+    const isExtName = allowedTypes.test(file.originalname.toLowerCase());
 
-    if(allowedTypes.includes(file.mimetype)) {
-        cb(null, true)
+    if (isMimeType && isExtName) {
+      return cb(null, true);
     } else {
-        cb(new Error('Only .jpeg .png and .jpg formats are allowed'), false)
+      cb(new Error("Only .png, .jpg, and .jpeg formats are allowed!"));
     }
-}
+  },
+});
 
-const upload = multer({ storage, fileFilter })
-
-module.exports = { upload }
+module.exports = upload;

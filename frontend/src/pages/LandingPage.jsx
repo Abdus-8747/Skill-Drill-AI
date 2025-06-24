@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Hero_Img from "../assets/HeroImage.png"
 import { APP_FEATURES } from "../utils/data"
 import { LuSparkles } from "react-icons/lu"
@@ -6,13 +6,22 @@ import { Link, useNavigate } from 'react-router-dom'
 import Login from './Auth/Login'
 import SignUp from './Auth/SignUp'
 import Modal from '../components/Modal'
+import { UserContext } from '../context/userContext'
+import ProfileInfoCard from '../components/Cards/ProfileInfoCard'
 
 const LandingPage = () => {
+  const { user } = useContext(UserContext)
   const navigate = useNavigate()
   const [openAuthModel, setOpenAuthModel] = useState(false)
   const [currentPage, setCurrentPage] = useState("login")
 
-  const handleCTA = () => { }
+  const handleCTA = () => { 
+    if(!user) {
+      setOpenAuthModel(true)
+  } else  {
+    navigate("/dashboard")
+  }
+}
 
   return (
     <>
@@ -27,13 +36,13 @@ const LandingPage = () => {
         <div className='relative z-10 container mx-auto px-4 pt-6 pb-[200px]'>
           {/* Header */}
           <header className='flex justify-between items-center mb-16'>
-            <div className='text-xl text-black font-bold'>Skill Drill AI</div>
-            <button
+            <div className='text-xl text-black font-bold'><Link to={"/"}>Skill Drill AI</Link></div>
+            {user ? (<ProfileInfoCard />) : (<button
               className='bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:scale-105 hover:shadow-md border border-white transition-all duration-200 ease-in-out cursor-pointer'
               onClick={() => setOpenAuthModel(true)}
             >
               Login / Sign Up
-            </button>
+            </button>)}
           </header>
 
           {/* Hero Text and CTA */}

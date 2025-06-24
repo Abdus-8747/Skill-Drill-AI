@@ -29,6 +29,7 @@ connectDB()
 
 //Middlewares
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 //Routes
 app.use("/api/auth", authRoute)
@@ -36,7 +37,7 @@ app.use("/api/sessions", sessionRoute)
 app.use("/api/questions", questionRoute)
 
 app.use("/api/ai/generate-questions", protect, generateInterviewQuestions)
-app.use("/api/ai/generate-explanations", protect , generateConceptExplanations)
+app.use("/api/ai/generate-explanation", protect , generateConceptExplanations)
 
 //Server uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads"), {}))

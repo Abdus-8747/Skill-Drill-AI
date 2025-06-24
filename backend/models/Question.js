@@ -5,7 +5,7 @@ const questionSchema = mongoose.Schema({
     question: String,
     answer: String,
     note: String,
-    isPinned: { type: String, default: false }
+    isPinned: { type: Boolean, default: false }
 }, { timestamps: true })
 
 module.exports = mongoose.model("Question", questionSchema)
