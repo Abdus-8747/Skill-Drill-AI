@@ -179,7 +179,7 @@ const InterviewPrep = () => {
           title={!isLoading && explanation?.title}
         >
           {errorMsg && (
-            <p className='flex items-center gap-2 text-sm text-amber-600 font-medium'>
+            <p className='flex items-center gap-2 text-sm text-purple-600 font-medium'>
               <LuCircleAlert className='mt-[1px]' />
               {errorMsg}
             </p>

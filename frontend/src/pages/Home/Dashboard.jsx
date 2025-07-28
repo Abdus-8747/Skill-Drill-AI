@@ -78,7 +78,7 @@ const Dashboard = () => {
 
 
         <button
-          className='h-12 md:h-12 flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white transition-all duration-300 cursor-pointer shadow-lg hover:shadow-orange-300 fixed bottom-6 md:bottom-10 right-6 md:right-10 z-40'
+          className='h-12 md:h-12 flex items-center justify-center gap-2 bg-gradient-to-r from-[#3624ff] to-[#6f07a3] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white transition-all duration-300 cursor-pointer shadow-lg hover:shadow-orange-300 fixed bottom-6 md:bottom-10 right-6 md:right-10 z-40'
           onClick={() => setOpenCreateModal(true)}
         >
           <LuPlus className='text-xl md:text-2xl' />

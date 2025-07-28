@@ -32,7 +32,7 @@ const Input = ({
         {type === "password" && (
           <button
             type="button"
-            className='ml-2 text-slate-500 hover:text-yellow-500'
+            className='ml-2 text-slate-500 hover:text-purple-500'
             onClick={toggleShowPassword}
           >
             {showPassword ? <FaRegEye size={18} /> : <FaRegEyeSlash size={18} />}
