@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:5000";
+export const BASE_URL = "https://skill-drill-ai-7thx.vercel.app/";
 
 export const API_PATHS = {
   AUTH: {
