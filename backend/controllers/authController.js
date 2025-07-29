@@ -2,7 +2,6 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("../utils/cloudinary");
-const fs = require("fs");
 
 // Generate JWT Token
 const generateToken = (userId) => {
@@ -12,12 +11,11 @@ const generateToken = (userId) => {
 // Register User
 const registerUser = async (req, res) => {
   try {
-    //console.log(req.body)
     const { name, email, password } = req.body;
-    
+
+    // Check if user exists
     const userExists = await User.findOne({ email });
     if (userExists) {
-      if (req.file) fs.unlinkSync(req.file.path); // delete temp file
       return res.status(400).json({ message: "User already exists" });
     }
 
@@ -27,17 +25,16 @@ const registerUser = async (req, res) => {
 
     let profileImageUrl = "";
 
-    // Upload to Cloudinary if file is present
+    // Upload to Cloudinary directly from memory
     if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path, {
+      const fileStr = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
+      const result = await cloudinary.uploader.upload(fileStr, {
         folder: "user-profiles",
       });
       profileImageUrl = result.secure_url;
-
-      fs.unlinkSync(req.file.path); // delete local file after upload
     }
 
-    // Create new user
+    // Create user
     const user = await User.create({
       name,
       email,
@@ -50,7 +47,7 @@ const registerUser = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      profileImageUrl: user.profileImageUrl,
+      profileImageUrl,
       token: generateToken(user._id),
     });
   } catch (error) {
@@ -101,4 +98,3 @@ module.exports = {
   loginUser,
   getUserProfile,
 };
-
