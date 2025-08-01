@@ -30,7 +30,7 @@ const SignUp = ({ setCurrentPage }) => {
       return
     }
 
-    if (!password || password.length < 8) {
+    if (!password || password.length < 6) {
       setError("Plaese enter a valid Password!")
       return
     }
@@ -99,7 +99,7 @@ const SignUp = ({ setCurrentPage }) => {
           value={password}
           onChange={({ target }) => setPassword(target.value)}
           label="Passoword"
-          placeholder="Min 8 Characters Required"
+          placeholder="Min 6 Characters Required"
           type="password"
         />
 
